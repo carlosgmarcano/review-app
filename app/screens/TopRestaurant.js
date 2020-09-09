@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 const TopRestaurant = () => {
     return (
         <View>
-            <Text>Top Restaurant</Text>
+            <Text>La morochas espinoza</Text>
         </View>
     )
 }
