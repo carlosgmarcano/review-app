@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Icon, Input, Button } from 'react-native-elements';
 import { size, isEmpty } from 'lodash'
+import * as firebase from 'firebase';
 import { validateEmail } from '../../utils/validations';
+import Loading from '../Loading';
+
+
+
 
 const RegisterForm = ({ toastRef }) => {
 
-
+    const navigation = useNavigation();
 
     const [visiblePass, setVisiblePass] = useState(true)
     const [repitePass, setRepitePass] = useState(true)
@@ -16,18 +22,32 @@ const RegisterForm = ({ toastRef }) => {
         repeatPassword: ''
     })
 
+    const { email, password, repeatPassword } = formData;
+
+    const [loading, setLoading] = useState(false)
+
     const onSubmit = () => {
-        if (isEmpty(formData.email) || isEmpty(formData.password) || isEmpty(formData.repeatPassword)) {
+        if (isEmpty(email) || isEmpty(password) || isEmpty(repeatPassword)) {
             toastRef.current.show('Todos los campos son obligatorios')
-        } else if (!validateEmail(formData.email)) {
+        } else if (!validateEmail(email)) {
             toastRef.current.show('Email incorrecto')
-        } else if (formData.password !== formData.repeatPassword) {
+        } else if (password !== repeatPassword) {
             toastRef.current.show('Las contraseñas deben ser iguales')
-        } else if (size(formData.password) < 6) {
+        } else if (size(password) < 6) {
             toastRef.current.show('la contraseña debe ser minimo 6 caracteres')
         }
         else {
-            toastRef.current.show('Todo Correcto')
+            setLoading(true);
+            firebase.auth()
+                .createUserWithEmailAndPassword(email, password)
+                .then(() => {
+                    setLoading(false);
+                    navigation.navigate("account-stack");
+                })
+                .catch(() => {
+                    setLoading(false);
+                    toastRef.current.show('Este email ya se encuentra registrado')
+                });
         }
 
     }
@@ -86,6 +106,7 @@ const RegisterForm = ({ toastRef }) => {
                 buttonStyle={styles.btnRegister}
                 onPress={onSubmit}
             />
+            <Loading isVisible={loading} text="Creando Cuenta..." />
         </View>
     )
 }

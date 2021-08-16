@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, ScrollView, Image } from 'react-native'
 import { Divider } from 'react-native-elements'
+import LoginForm from '../../components/Account/LoginForm';
+import Toast from "react-native-easy-toast"
+import LoginFacebook from '../../components/Account/LoginFacebook';
 
 const Login = () => {
 
     const navigation = useNavigation();
+    const toastRef = useRef();
 
     return (
         <ScrollView>
@@ -15,7 +19,7 @@ const Login = () => {
                 style={styles.logo}
             />
             <View style={styles.viewContainer}>
-                <Text>Login Form</Text>
+                <LoginForm toastRef={toastRef} />
                 <Text
                     style={styles.textRegister}
                 >
@@ -31,7 +35,15 @@ const Login = () => {
             <Divider
                 style={styles.divider}
             />
-            <Text>Social Login</Text>
+            <View style={styles.viewContainer}>
+                <LoginFacebook toastRef={toastRef} />
+            </View>
+            <Toast
+                ref={toastRef}
+                position="center"
+                opacity={0.9}
+                useNativeDriver="false"
+            />
         </ScrollView>
     )
 }
@@ -51,7 +63,7 @@ const styles = StyleSheet.create({
         margin: 40
     },
     textRegister: {
-        marginTop: 15,
+        marginTop: 10,
         marginLeft: 10,
         marginRight: 10
     },

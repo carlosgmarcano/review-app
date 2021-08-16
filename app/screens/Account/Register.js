@@ -9,7 +9,9 @@ const Register = () => {
     const toastRef = useRef();
 
     return (
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView
+            useNativeDriver='false'
+        >
             <Image
                 source={require('../../../assets/img/LogoAQP.png')}
                 resizeMode="contain"
