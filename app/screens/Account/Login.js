@@ -29,7 +29,7 @@ const Login = () => {
                         onPress={() => navigation.navigate('register-stack')}
                     >
                         Registrate
-                </Text>
+                    </Text>
                 </Text>
             </View>
             <Divider
@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     },
     divider: {
         backgroundColor: '#00a680',
-        margin: 40
+        margin: 40,
+        paddingBottom: 0
     },
     textRegister: {
         marginTop: 10,

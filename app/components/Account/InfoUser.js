@@ -5,7 +5,7 @@ import * as firebase from "firebase"
 import * as Permissions from "expo-permissions"
 import * as ImagePicker from "expo-image-picker"
 
-const InfoUser = ({ userInfo, toastRef }) => {
+const InfoUser = ({ userInfo, toastRef, setLoading, setLoadingText }) => {
 
     const { photoURL, displayName, email, uid } = userInfo
 
@@ -25,7 +25,7 @@ const InfoUser = ({ userInfo, toastRef }) => {
                 toastRef.current.show("Has Cerrado la seleccion de imagenes")
             } else {
                 uploadImage(result.uri).then(() => {
-                    console.log("Imagen Subida");
+                    updatePhotoURL();
                 }).catch(() => {
                     toastRef.current.show("Error al actualizar el Avatar")
                 })
@@ -34,11 +34,30 @@ const InfoUser = ({ userInfo, toastRef }) => {
     }
 
     const uploadImage = async (uri) => {
+        setLoadingText("Actualizando Avatar");
+        setLoading(true);
         const response = await fetch(uri);
         const blob = await response.blob();
-        const ref = firebase.storage().ref.child(`avatar/${uid}`);
+        const ref = firebase.storage().ref().child(`avatar/${uid}`);
         return ref.put(blob)
     };
+
+    const updatePhotoURL = () => {
+        firebase
+            .storage()
+            .ref(`avatar/${uid}`)
+            .getDownloadURL()
+            .then(async (response) => {
+                const update = {
+                    photoURL: response
+                };
+                await firebase.auth().currentUser.updateProfile(update)
+                setLoading(false)
+            })
+            .catch(() => {
+                toastRef.current.show("Error al obtener la URL del Avatar")
+            })
+    }
 
     return (
         <View style={styles.viewUserInfo}>
@@ -57,7 +76,7 @@ const InfoUser = ({ userInfo, toastRef }) => {
             />
             <View>
                 <Text style={styles.displayNameText}>
-                    {displayName ? displayName : "Anonimo"}
+                    {displayName ? displayName : "Usuario Anonimo"}
                 </Text>
                 <Text>
                     {email ? email : "Social Login"}
