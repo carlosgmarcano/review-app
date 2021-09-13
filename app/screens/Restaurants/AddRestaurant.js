@@ -6,7 +6,7 @@ import AddRestaurantForm from '../../components/Restaurants/AddRestaurantForm';
 
 const AddRestaurant = ({ navigation }) => {
     const [isLoading, setIsLoading] = useState(false)
-    const toastRef = useRef()
+    const toastRef = useRef();
     return (
         <View>
             <AddRestaurantForm

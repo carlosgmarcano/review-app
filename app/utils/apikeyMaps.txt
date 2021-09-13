@@ -1,0 +1,8 @@
+API KEY - GoogleMaps
+AIzaSyDE0T1wHG3V_Bgt-AMf88tMGqb4d6f3Z28
+
+Accessing credentials for carlosgmarcano in project review-app
+Google Certificate Fingerprint:     EA:CE:74:D4:72:F9:8F:2E:75:F7:7D:F1:62:8C:FE:D5:1C:2C:04:6B
+Google Certificate Hash (SHA-1):    EACE74D472F98F2E75F77DF1628CFED51C2C046B
+Google Certificate Hash (SHA-256):  8E3F57F38E212DFDDAAB8FAA952810DB24A493191105209780F5A149ABC2E5CB
+Facebook Key Hash:                  6s501HL5jy51933xYoz+1RwsBGs=

@@ -16,10 +16,19 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.carlosgmarcano.reviewapp",
+      "config":{
+        "googleMaps":{
+          "apiKey":"AIzaSyDE0T1wHG3V_Bgt-AMf88tMGqb4d6f3Z28"
+        }
+      },
       "permissions": [
         "CAMERA_ROLL",
         "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
+        "WRITE_EXTERNAL_STORAGE",
+        "LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "FOREGROUND_SERVICE"
       ]
     },
     "web": {
