@@ -19,7 +19,7 @@ const LoginForm = ({ toastRef }) => {
         password: ""
     });
 
-    const { email, password } = formData
+    const { email, password } = formData;
 
     const onChangeText = (e, type) => {
         setFormData({
