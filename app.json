@@ -8,17 +8,19 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00A680"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "package": "com.carlosgmarcano.reviewapp",
-      "config":{
-        "googleMaps":{
-          "apiKey":"AIzaSyDE0T1wHG3V_Bgt-AMf88tMGqb4d6f3Z28"
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDE0T1wHG3V_Bgt-AMf88tMGqb4d6f3Z28"
         }
       },
       "permissions": [
@@ -34,6 +36,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Proyecto Final"
   }
 }
